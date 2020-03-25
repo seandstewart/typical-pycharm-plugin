@@ -1,0 +1,51 @@
+<idea-plugin url="https://github.com/seandstewart/typical-pycharm-plugin">
+    <id>com.seandstewart.typical</id>
+    <name>Typical</name>
+    <version>0.1.0</version>
+    <vendor email="stewart.d.sean@gmail.com">Sean Stewart @seandstewart</vendor>
+    <description><![CDATA[
+    <p>This plugin provides autocompletion support for <a href="https://github.com/seandstewart/typical">typical</a></p>
+    <h2>Features</h2>
+    <ul>
+        <li>@typic.klass
+            <ul>
+               <li>Model-specific __init__-signature inspection and autocompletion for classes defined with @typic.klass</li>
+               <li>Model-specific __init__-arguments type-checking for subclasses for classes defined with @typic.klass</li>
+               <li>Refactor support for renaming fields for subclasses of BaseModel</li>
+                <li>(If the field name is refactored from the model definition or __init__ call keyword arguments, PyCharm will present a dialog offering the choice to automatically rename the keyword where it occurs in a model initialization call.</li>
+               <li>Search related-fields by class attributes and keyword arguments of __init__. with Ctrl+B and Cmd+B</li>
+            </ul>
+         </li>
+    </ul>
+    ]]></description>
+
+    <idea-version since-build="201.0"/>
+
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.python</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="Python" shortName="TypicalInspection" suppressId="Typical"
+                         displayName="Typical definition and usages"
+                         enabledByDefault="true" level="WARNING"
+                         implementationClass="com.seandstewart.typical.TypicalInspection"/>
+        <automaticRenamerFactory 
+                implementation="com.seandstewart.typical.TypicalFieldRenameFactory"/>
+        <referencesSearch 
+                implementation="com.seandstewart.typical.TypicalFieldSearchExecutor"/>
+        <completion.contributor language="Python"
+                                implementationClass="com.seandstewart.typical.TypicalCompletionContributor"/>
+        <projectService
+                        serviceImplementation="com.seandstewart.typical.TypicalConfigService"/>
+
+        <projectConfigurable groupId="tools" 
+                             instance="com.seandstewart.typical.TypicalConfigurable"/>
+
+    </extensions>
+    <extensions defaultExtensionNs="Pythonid">
+        <typeProvider implementation="com.seandstewart.typical.TypicalTypeProvider"/>
+    </extensions>
+
+    <resource-bundle/>
+</idea-plugin>
+
