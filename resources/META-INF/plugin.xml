@@ -19,14 +19,14 @@
     </ul>
     ]]></description>
 
-    <idea-version since-build="201.0"/>
+    <idea-version since-build="193.0"/>
 
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.python</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <localInspection language="Python" shortName="TypicalInspection" suppressId="Typical"
-                         displayName="Typical definition and usages"
+                         displayName="Typical definition and usages" groupKey="INSP.GROUP.python"
                          enabledByDefault="true" level="WARNING"
                          implementationClass="com.seandstewart.typical.TypicalInspection"/>
         <automaticRenamerFactory 
